@@ -1,7 +1,7 @@
 {
-  "name": "workflow-automation",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "> A lightweight, self-hosted Zapier / Make alternative — connect triggers to actions, automate anything.",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
