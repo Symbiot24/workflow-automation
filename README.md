@@ -217,7 +217,7 @@ Create a clean, reproducible project skeleton with proper tooling so every subse
 
 - [ ] Monorepo vs. polyrepo — why a monorepo suits this project (shared types, single Docker Compose)
 - [ ] Node.js project structure conventions (what goes where and why)
-- [ ] TypeScript strict mode — what `strict: true` enables and why it matters
+- [ ] JavaScript best practices — using ESLint for code quality and consistency
 - [ ] ESLint + Prettier — linting vs. formatting, how they complement each other
 - [ ] Environment variables & `.env` files — the 12-factor app config principle
 - [ ] Git branching basics — `main` vs. feature branches, meaningful commit messages
@@ -227,7 +227,7 @@ Create a clean, reproducible project skeleton with proper tooling so every subse
 
 - [ ] Initialize the monorepo root (`package.json` with workspaces or `pnpm-workspace.yaml`)
 - [ ] Create the folder structure: `backend/`, `frontend/`, `docker/` (empty for now)
-- [ ] Set up TypeScript at the root with `tsconfig.json` (strict mode, path aliases)
+- [ ] Set up JavaScript at the root with `jsconfig.json` (path aliases)
 - [ ] Configure ESLint + Prettier at the root
 - [ ] Create `.env.example` documenting every env var the project will need (DB URL, Redis URL, JWT secret, etc.)
 - [ ] Create `.gitignore` (covers `node_modules/`, `dist/`, `.env`, logs, OS files)
@@ -246,7 +246,7 @@ workflow-automation/
 ├── .env.example
 ├── .gitignore
 ├── package.json                     # root workspace manifest
-├── tsconfig.json
+├── jsconfig.json
 ├── .eslintrc / eslint.config.js
 ├── .prettierrc
 ├── .editorconfig
@@ -256,7 +256,6 @@ workflow-automation/
 #### Definition of Done
 
 - [ ] `npm install` (or `pnpm install`) succeeds from the root with zero errors
-- [ ] `npx tsc --noEmit` (or equivalent) passes with no TypeScript errors
 - [ ] `npx eslint .` passes with no errors
 - [ ] `.env.example` lists every variable needed for local dev
 - [ ] A fresh clone + `npm install` gets a new contributor to a running state (no hidden steps)
@@ -267,7 +266,7 @@ workflow-automation/
 
 #### Objective
 
-Stand up a minimal Fastify server in TypeScript that boots, handles a health check, and has the plugin/middleware structure needed for everything that follows.
+Stand up a minimal Fastify server in JavaScript that boots, handles a health check, and has the plugin/middleware structure needed for everything that follows.
 
 #### Concepts to Learn
 
@@ -281,7 +280,7 @@ Stand up a minimal Fastify server in TypeScript that boots, handles a health che
 
 #### Tasks
 
-- [ ] Install Fastify, TypeScript, and supporting packages in `backend/`
+- [ ] Install Fastify and supporting packages in `backend/`
 - [ ] Create the Fastify app entry point (`backend/src/app.ts` or `backend/src/server.ts`)
 - [ ] Register core plugins: logger (Pino), CORS, sensible/helmet (error helpers + security headers)
 - [ ] Implement `GET /health` — returns `{ status: "ok", uptime, version }`
@@ -309,7 +308,7 @@ backend/
 │   │   └── health.route.ts
 │   └── utils/
 │       └── logger.ts
-├── tsconfig.json
+├── jsconfig.json
 └── package.json
 ```
 
@@ -369,13 +368,13 @@ backend/
 │   └── modules/
 │       └── (empty — filled in later phases)
 ├── migrations/
-│   ├── 001_create_users.sql (or .ts)
+│   ├── 001_create_users.sql (or .js)
 │   ├── 002_create_workflows.sql
 │   ├── 003_create_workflow_nodes.sql
 │   ├── 004_create_executions.sql
 │   ├── 005_create_execution_steps.sql
 │   └── 006_create_credentials.sql
-└── (ORM config if applicable: drizzle.config.ts / prisma/schema.prisma)
+└── (ORM config if applicable: drizzle.config.js / prisma/schema.prisma)
 ```
 
 #### Definition of Done
@@ -523,7 +522,7 @@ Design the extensible trigger/action registry and implement the 3 MVP triggers a
 #### Tasks
 
 - [ ] Design the `TriggerRegistry` and `ActionRegistry` — maps `type` string → handler object with `validate`, `execute` methods
-- [ ] Define the `TriggerHandler` and `ActionHandler` interfaces (TypeScript)
+- [ ] Define the `TriggerHandler` and `ActionHandler` interfaces (JavaScript)
 - [ ] Implement **Webhook trigger**: `POST /api/webhooks/:workflowId/:secret` — validates the secret, captures the payload, fires the workflow
 - [ ] Implement **Schedule trigger**: accepts a cron expression, registers a cron job that fires the workflow on schedule
 - [ ] Implement **Manual trigger**: `POST /api/workflows/:id/trigger` — fires the workflow immediately with optional input payload
@@ -1918,7 +1917,7 @@ Before calling the project done, verify every item below.
 
 ### Code Quality
 
-- [ ] TypeScript strict mode with no `any` escapes (or every `any` is justified with a comment)
+- [ ] JavaScript best practices with no `any` escapes (or every `any` is justified with a comment)
 - [ ] No secrets or credentials committed to Git
 - [ ] Consistent code style (ESLint + Prettier pass with zero errors)
 - [ ] Meaningful commit history (not one giant commit)
@@ -1971,7 +1970,7 @@ Phase 14  ── Docker & Deployment
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
 | Runtime | Node.js (LTS) | JavaScript runtime |
-| Language | TypeScript (strict) | Type safety |
+| Language | JavaScript (standard) | Type safety |
 | Backend Framework | Fastify | HTTP server, validation, plugins |
 | Database | PostgreSQL | Durable storage |
 | Queue | Redis + BullMQ | Job queue, retries, scheduling |

@@ -1,16 +1,27 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Backend service for workflow automation",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/server.js",
+    "build": "esbuild src/server.js --bundle --platform=node --outfile=dist/server.js",
+    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@fastify/cors": "^11.3.0",
+    "@fastify/helmet": "^13.1.1",
+    "@fastify/sensible": "^6.0.6",
+    "dotenv": "^18.0.4",
     "fastify": "^5.12.5"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "nodemon": "^3.1.14"
   }
 }
