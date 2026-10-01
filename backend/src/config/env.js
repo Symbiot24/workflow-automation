@@ -1,4 +1,4 @@
-require("dotenv").config();
+import "dotenv/config";
 
 function getEnv(name, defaultValue) {
   const value = process.env[name];
@@ -25,4 +25,4 @@ if (Number.isNaN(env.port)) {
   throw new Error("PORT must be a valid number");
 }
 
-module.exports = env;
+export default env;

@@ -1,13 +1,12 @@
-const Fastify = require("fastify");
+import Fastify from "fastify";
+import loggerPlugin from "./plugins/logger.js";
+import corsPlugin from "./plugins/cors.js";
+import securityPlugin from "./plugins/security.js";
+import errorHandlerPlugin from "./plugins/error-handler.js";
 
-const loggerPlugin = require("./plugins/logger");
-const corsPlugin = require("./plugins/cors");
-const securityPlugin = require("./plugins/security");
-const errorHandlerPlugin = require("./plugins/error-handler");
+import healthRoutes from "./routes/health.route.js";
 
-const healthRoutes = require("./routes/health.route");
-
-function buildApp() {
+export default function buildApp() {
   const fastify = Fastify({
     logger: true
   });
@@ -21,5 +20,3 @@ function buildApp() {
 
   return fastify;
 }
-
-module.exports = buildApp;

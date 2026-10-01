@@ -1,5 +1,5 @@
-const buildApp = require("./app");
-const env = require("./config/env");
+import buildApp from "./app.js";
+import env from "./config/env.js";
 
 const app = buildApp();
 

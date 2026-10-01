@@ -1,5 +1,3 @@
-async function loggerPlugin(fastify) {
+export default async function loggerPlugin(fastify) {
   fastify.log.info("Logger plugin registered");
 }
-
-module.exports = loggerPlugin;

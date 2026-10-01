@@ -1,11 +1,16 @@
-const env = require("../config/env");
+import env from "../config/env.js";
+import checkDatabaseConnection from "../db/health.js";
+import { db } from "../db/connection.js"; 
 
-async function healthRoutes(fastify) {
+export default async function healthRoutes(fastify) {
   fastify.get("/health", async () => {
+
+    const db = await checkDatabaseConnection();
+    
     return {
-      status: "ok",
+      status: db.connected ? "ok" : "Degraded",
+      db,
       uptime: process.uptime(),
-      version: env.appVersion
     };
   });
 
@@ -40,5 +45,3 @@ async function healthRoutes(fastify) {
     }
   );
 }
-
-module.exports = healthRoutes;

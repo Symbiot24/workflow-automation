@@ -1,7 +1,5 @@
-const helmet = require("@fastify/helmet");
+import helmet from "@fastify/helmet";
 
-async function securityPlugin(fastify) {
+export default async function securityPlugin(fastify) {
   await fastify.register(helmet);
 }
-
-module.exports = securityPlugin;

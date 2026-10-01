@@ -1,4 +1,4 @@
-async function errorHandlerPlugin(fastify) {
+export default async function errorHandlerPlugin(fastify) {
   fastify.setErrorHandler((error, request, reply) => {
     request.log.error(error);
 
@@ -11,5 +11,3 @@ async function errorHandlerPlugin(fastify) {
     });
   });
 }
-
-module.exports = errorHandlerPlugin;
