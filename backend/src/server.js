@@ -1,7 +1,7 @@
 import buildApp from "./app.js";
 import env from "./config/env.js";
 
-const app = buildApp();
+const app = await buildApp();
 
 async function start() {
   try {

@@ -18,7 +18,10 @@ const env = {
   port: Number(getEnv("PORT", "3000")),
   host: getEnv("HOST", "0.0.0.0"),
   nodeEnv: getEnv("NODE_ENV", "development"),
-  appVersion: getEnv("APP_VERSION", "1.0.0")
+  appVersion: getEnv("APP_VERSION", "1.0.0"),
+
+  databaseUrl: getEnv("DATABASE_URL"),
+  jwtAccessSecret: getEnv("JWT_SECRET"),
 };
 
 if (Number.isNaN(env.port)) {
