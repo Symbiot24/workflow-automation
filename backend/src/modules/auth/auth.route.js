@@ -7,6 +7,7 @@ import {
 import {
   registerUser,
   loginUser,
+  logoutUser
 } from "./auth.service.js";
 
 export default async function authRoutes(fastify) {
@@ -57,6 +58,22 @@ export default async function authRoutes(fastify) {
 
         throw error;
       }
+    }
+  );
+
+  fastify.post(
+    "/logout",
+    {
+      schema: refreshSchema,
+    },
+    async (request, reply) => {
+      const { refreshToken } = request.body;
+  
+      await logoutUser(fastify, refreshToken);
+  
+      return reply.send({
+        message: "Logged out successfully",
+      });
     }
   );
 }

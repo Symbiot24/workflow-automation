@@ -1,10 +1,10 @@
 import { eq } from "drizzle-orm";
-import { users } from "../../db/schema.js";
+import { users, refreshTokens } from "../../db/schema.js";
 import {
   hashPassword,
   comparePassword,
 } from "../../utils/hash.js";
-import { createAccessToken } from "../../utils/tokens.js";
+import { createAccessToken, hashRefreshToken } from "../../utils/tokens.js";
 
 export async function registerUser(
   fastify,
@@ -71,5 +71,23 @@ export async function loginUser(
       name: user.name,
     },
     accessToken,
+  };
+}
+
+export async function logoutUser(fastify, refreshToken) {
+  const tokenHash = hashRefreshToken(refreshToken);
+
+  const [token] = await fastify.db
+    .update(refreshTokens)
+    .set({
+      revokedAt: new Date(),
+    })
+    .where(eq(refreshTokens.tokenHash, tokenHash))
+    .returning({
+      id: refreshTokens.id,
+    });
+
+  return {
+    message: "Logged out successfully",
   };
 }
