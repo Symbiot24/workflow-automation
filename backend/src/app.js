@@ -8,9 +8,10 @@ import authRoutes from "./modules/auth/auth.route.js";
 import healthRoutes from "./routes/health.route.js";
 import usersRoutes from "./modules/users/users.route.js";
 import jwtPlugin from "./plugins/jwt.js";
+import workflowsRoutes from "./modules/workflows/workflows.route.js";
 
 
-export default async function buildApp() {
+export default function buildApp() {
   const fastify = Fastify({
     logger: true
   });
@@ -22,13 +23,14 @@ export default async function buildApp() {
   fastify.register(dbPlugin);
   fastify.register(jwtPlugin);
   fastify.register(healthRoutes);
-  
-  await fastify.register(usersRoutes, {
+  fastify.register(authRoutes, {
+    prefix: "/api/auth",
+  });
+  fastify.register(usersRoutes, {
     prefix: "/api/users",
   });
-
-  await fastify.register(authRoutes, {
-    prefix: "/api/auth",
+  fastify.register(workflowsRoutes, {
+    prefix: "/api/workflows",
   })
 
   return fastify;
